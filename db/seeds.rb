@@ -1,7 +1,7 @@
 100.times do
   name = Faker::Internet.user_name
   password = "123"
-  User.create!(username: name, password_hash: password)
+  User.create!(username: name, password: password)
 end
 
 300.times do

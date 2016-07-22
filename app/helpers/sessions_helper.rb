@@ -6,4 +6,13 @@ helpers do
   def login(user)
     session[:user_id] = user.id
   end
+
+  def authenticate(username, password)
+    if current_user && current_user.password == password
+      current_user
+    else
+      nil
+    end
+  end
+
 end

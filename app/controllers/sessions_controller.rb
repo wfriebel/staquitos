@@ -4,7 +4,8 @@ get '/register' do
 end
 
 post '/register' do
-  if @user = User.create(params[:user])
+@user = User.create(params)
+  if @user.save
     login(@user)
     redirect '/'
   else
@@ -18,8 +19,9 @@ get '/login' do
 end
 
 post '/login' do
-  if @user.authenticate
-    login(@user)
+  p current_user
+  if authenticate(params[:username], params[:password])
+    login(current_user)
 
     p "login submitted"
     redirect "/"
@@ -28,4 +30,10 @@ post '/login' do
       erb :'sessions/login'
   end
 end
+
+get '/logout' do
+  session[:user_id] = nil
+  redirect '/'
+end
+
 
