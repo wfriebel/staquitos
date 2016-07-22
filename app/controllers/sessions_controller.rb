@@ -4,7 +4,8 @@ get '/register' do
 end
 
 post '/register' do
-  if @user = User.create(params[:user])
+@user = User.create(params)
+  if @user.save
     login(@user)
     redirect '/'
   else
@@ -18,14 +19,19 @@ get '/login' do
 end
 
 post '/login' do
-  if @user.authenticate
-    login(@user)
-
-    p "login submitted"
+  user = authenticate(params[:username], params[:password])
+  if user
+    login(user)
     redirect "/"
   else
-    @error = "Invalid email or password"
-      erb :'sessions/login'
+    @error = "Invalid username or password"
+    erb :'sessions/login'
   end
 end
+
+get '/logout' do
+  session[:user_id] = nil
+  redirect '/'
+end
+
 
