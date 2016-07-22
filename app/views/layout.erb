@@ -18,6 +18,15 @@
   <title>STAQUITOS</title>
 </head>
 <body>
+<!-- to user controller -->
+
+<!-- login link -->
+<% if current_user == nil %>
+<a href="/register">Register</a> | <a href="/login">Login</a>
+<% else %>
+<a href="/logout">Logout</a>
+<h3>Welcome <%= current_user.username %>!</h3>
+<% end %>
   <%= yield %>
 </body>
 </html>
