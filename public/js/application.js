@@ -1,17 +1,12 @@
 $(document).ready(function() {
-  console.log("READY!");
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+displayRegisterForm();
 showLogin();
 submitLogin();
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 });
 
 function showLogin(){
   $('#login-button').on('click', function(event){
   event.preventDefault();
-  // console.log(event);
   $.ajax({
     url: '/login',
     method: 'GET'
@@ -25,7 +20,6 @@ function showLogin(){
 function submitLogin(){
   $("#nav-bar").on('submit', function(event){
     event.preventDefault();
-    console.log(event);
     var formData = $('#login-form').serialize()
     $.ajax({
       url: '/login',
@@ -38,3 +32,37 @@ function submitLogin(){
   })
 
 };
+function displayRegisterForm(){
+  $('#nav-bar').on('click', function(e){
+    e.preventDefault();
+
+    $.ajax({
+      url: '/register',
+      type: 'get'
+    }).done(function(response){
+      $('#register-form-container').empty();
+      $('#register-form-container').append(response);
+      submitRegisterForm()
+    })
+  })
+}
+function submitRegisterForm(){
+  $('#register-form').submit(function(event){
+    event.preventDefault();
+
+    var formData = $('#register-form').serialize();
+    $.ajax({
+      url: "/register",
+      type: "POST",
+      data: formData
+    }).done(function(response){
+      if (response.success === true){
+        $('#register-form').hide()
+        $('#form-error').empty();
+      }else{
+        $('#form-error').empty();
+        $('#form-error').html('INVALID USERNAME OR PASSWORD');
+      }
+    })
+  })
+}
