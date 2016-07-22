@@ -21,12 +21,14 @@
 <!-- to user controller -->
 
 <!-- login link -->
-<% if current_user == nil %>
-<a href="/register">Register</a> | <a href="/login">Login</a>
-<% else %>
-<a href="/logout">Logout</a>
-<h3>Welcome <%= current_user.username %>!</h3>
-<% end %>
+<div id="nav-bar">
+  <% if current_user == nil %>
+    <a href="/register">Register</a> | <a id="login-button" href="/login">Login</a>
+  <% else %>
+    <a href="/logout">Logout</a>
+    <h3>Welcome <%= current_user.username %>!</h3>
+  <% end %>
+</div>
   <%= yield %>
 </body>
 </html>

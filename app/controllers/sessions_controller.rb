@@ -14,8 +14,11 @@ post '/register' do
 end
 
 get '/login' do
-
-  erb :'sessions/login'
+  if request.xhr?
+    erb :'sessions/login', layout: false
+  else
+    erb :'posts/index'
+  end
 end
 
 post '/login' do
@@ -33,5 +36,3 @@ get '/logout' do
   session[:user_id] = nil
   redirect '/'
 end
-
-
