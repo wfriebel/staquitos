@@ -22,14 +22,17 @@ get '/login' do
 end
 
 post '/login' do
-  user = authenticate(params[:username], params[:password])
-  if user
-    login(user)
-    redirect "/"
+  p "NAILLLLLLEEEEDDDD IT!"
+  @user = authenticate(params[:username], params[:password])
+  if @user
+    if request.xhr?
+    login(@user)
+    end
   else
     @error = "Invalid username or password"
     erb :'sessions/login'
   end
+p current_user
 end
 
 get '/logout' do
