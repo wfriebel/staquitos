@@ -18,7 +18,7 @@ get '/login' do
 end
 
 post '/login' do
-  if @user
+  if @user.authenticate
     login(@user)
 
     p "login submitted"
