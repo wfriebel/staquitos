@@ -9,11 +9,11 @@ end
 post '/register' do
   @user = User.create(params)
   if @user.save
+    login(@user)
     if request.xhr?
       content_type :json
       {success: true}.to_json
     else
-      login(@user)
       redirect '/'
     end
   else

@@ -1,7 +1,6 @@
 $(document).ready(function() {
 displayRegisterForm();
 showLogin();
-submitLogin();
 });
 
 function showLogin(){
@@ -13,12 +12,13 @@ function showLogin(){
   })
   .done(function(serverData) {
     $("#nav-bar").append(serverData)
+    submitLogin();
   });
 })
 };
 
 function submitLogin(){
-  $("#nav-bar").on('submit', function(event){
+  $("#login-form").on('submit', function(event){
     event.preventDefault();
     var formData = $('#login-form').serialize()
     $.ajax({
@@ -33,7 +33,7 @@ function submitLogin(){
 
 };
 function displayRegisterForm(){
-  $('#nav-bar').on('click', function(e){
+  $('#register-button').on('click', function(e){
     e.preventDefault();
 
     $.ajax({

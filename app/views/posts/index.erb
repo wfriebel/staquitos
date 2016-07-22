@@ -5,4 +5,8 @@
 </div>
 <!-- register links -->
 
-
+<ul>
+  <% Question.all.each do |question| %>
+  <li><a href="questions/<%=question.id%>"><%= question.title %></a></li>
+  <% end %>
+</ul>
