@@ -1,0 +1,13 @@
+<h1>Login form here</h1>
+
+<form action='/login' method="POST">
+  <label>Email</label>
+    <input type="email" name="username">
+  <label>Password</label>
+    <input type="password" name="password">
+    <input type="submit">
+</form>
+
+<% if @error %>
+<%= @error %>
+<% end %>
