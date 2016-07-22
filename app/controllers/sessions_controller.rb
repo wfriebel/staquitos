@@ -19,15 +19,13 @@ get '/login' do
 end
 
 post '/login' do
-  p current_user
-  if authenticate(params[:username], params[:password])
-    login(current_user)
-
-    p "login submitted"
+  user = authenticate(params[:username], params[:password])
+  if user
+    login(user)
     redirect "/"
   else
-    @error = "Invalid email or password"
-      erb :'sessions/login'
+    @error = "Invalid username or password"
+    erb :'sessions/login'
   end
 end
 
