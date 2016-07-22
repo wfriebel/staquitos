@@ -22,7 +22,9 @@
 
 <!-- login link -->
 <% if current_user == nil %>
-<a href="/register">Register</a> | <a href="/login">Login</a>
+<div id='register-link'>
+  <a href="/register">Register</a> | <a href="/login">Login</a>
+</div>
 <% else %>
 <a href="/logout">Logout</a>
 <h3>Welcome <%= current_user.username %>!</h3>
