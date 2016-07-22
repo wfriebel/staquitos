@@ -1,15 +1,28 @@
 get '/register' do
-
-  erb :'sessions/register'
+  if request.xhr?
+    erb :'sessions/register', layout: false
+  else
+    erb :'sessions/register'
+  end
 end
 
 post '/register' do
-@user = User.create(params)
+  @user = User.create(params)
   if @user.save
-    login(@user)
-    redirect '/'
+    if request.xhr?
+      content_type :json
+      {success: true}.to_json
+    else
+      login(@user)
+      redirect '/'
+    end
   else
-    redirect '/register'
+    if request.xhr?
+      content_type :json
+      {success: false}.to_json
+    else
+      redirect '/register'
+    end
   end
 end
 
