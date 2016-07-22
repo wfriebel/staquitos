@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
   # Remember to create a migration!
   has_many :questions
   has_many :answers
+  validates :username, presence: true
+  validates :password_hash, presence: true 
+
+
 
   def password
     @password ||= Password.new(password_hash)
