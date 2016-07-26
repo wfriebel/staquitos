@@ -5,6 +5,7 @@ helpers do
 
   def login(user)
     session[:user_id] = user.id
+    p user
   end
 
   def authenticate(username, password)

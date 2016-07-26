@@ -1,3 +1,3 @@
-get '/' do
+  get '/' do
   erb :'posts/index'
 end

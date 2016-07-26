@@ -1,5 +1,12 @@
-<h1>homepage users & non users</h1>
+<h1>S T A Q U I T O S</h1>
 
+<div id='register-form-container'>
+  <p id='form-error'></p>
+</div>
 <!-- register links -->
 
-
+<ul>
+  <% Question.all.each do |question| %>
+  <li><a href="questions/<%=question.id%>"><%= question.title %></a></li>
+  <% end %>
+</ul>
